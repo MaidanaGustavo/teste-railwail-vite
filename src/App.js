@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [showMessage, setShowMessage] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {!showMessage ? (
+        <div className="initial-screen">
+          <button className="red-button" onClick={() => setShowMessage(true)}>
+            Clique Aqui
+          </button>
+        </div>
+      ) : (
+        <>
+          <div className="love-message-container">
+            <div className="background-image"></div>
+            <h1 className="love-message">Te amo Maria Clara</h1>
+            <div className="hearts-container">
+              {[...Array(15)].map((_, index) => (
+                <div
+                  key={index}
+                  className="heart"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 3}s`,
+                    animationDuration: `${3 + Math.random() * 2}s`
+                  }}
+                >
+                  ❤️
+                </div>
+              ))}
+            </div>
+          </div>
+          <footer className="footer">by: Gustavo Maidana</footer>
+        </>
+      )}
     </div>
   );
 }

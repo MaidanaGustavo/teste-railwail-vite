@@ -1,38 +1,255 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
+  min-height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.initial-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  height: 100vh;
+}
+
+.red-button {
+  background-color: #e53e3e;
   color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1.5rem 3rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(229, 62, 62, 0.4);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  z-index: 100;
 }
 
-.App-link {
-  color: #61dafb;
+.red-button:hover {
+  background-color: #c53030;
+  transform: scale(1.1);
+  box-shadow: 0 15px 40px rgba(229, 62, 62, 0.6);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.red-button:active {
+  transform: scale(0.95);
+}
+
+.love-message-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/Screenshot_20251104_230714_Gallery.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.3;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  z-index: 1;
+}
+
+.love-message {
+  font-size: 3.5rem;
+  color: white;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+  z-index: 10;
+  padding: 2rem;
+  max-width: 90%;
+  line-height: 1.4;
+}
+
+.hearts-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.heart {
+  position: absolute;
+  bottom: -50px;
+  font-size: 3rem;
+  animation: float-up linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes float-up {
+  0% {
+    bottom: -50px;
+    opacity: 0;
+    transform: translateX(0) rotate(0deg);
   }
-  to {
-    transform: rotate(360deg);
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    bottom: 110vh;
+    opacity: 0;
+    transform: translateX(100px) rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.footer {
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  z-index: 1000;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 0 20px;
+}
+
+.love-message-container + .footer {
+  position: fixed;
+  bottom: 20px;
+}
+
+/* iPhone 15 Pro Max: 430x932 */
+/* iPhone 15 Pro: 393x852 */
+/* iPhone 15 Plus: 430x932 */
+/* iPhone 15: 393x852 */
+@media (max-width: 430px) {
+  .love-message {
+    font-size: 2.5rem;
+    padding: 1.5rem 1rem;
+    line-height: 1.3;
+  }
+
+  .red-button {
+    font-size: 1.3rem;
+    padding: 1.2rem 2.5rem;
+    border-radius: 40px;
+    letter-spacing: 1.5px;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .red-button:hover {
+    transform: scale(1.1);
+  }
+
+  .red-button:active {
+    transform: scale(0.95);
+  }
+
+  .heart {
+    font-size: 2.5rem;
+  }
+
+  .footer {
+    font-size: 0.85rem;
+    bottom: 15px;
+  }
+}
+
+/* Específico para iPhone 15 Pro (393px) */
+@media (max-width: 393px) {
+  .love-message {
+    font-size: 2.2rem;
+    padding: 1rem;
+  }
+
+  .red-button {
+    font-size: 1.2rem;
+    padding: 1rem 2.2rem;
+  }
+
+  .red-button:hover {
+    transform: scale(1.1);
+  }
+
+  .red-button:active {
+    transform: scale(0.95);
+  }
+
+  .heart {
+    font-size: 2.2rem;
+  }
+
+  .footer {
+    font-size: 0.8rem;
+  }
+}
+
+/* Landscape mode para iPhone */
+@media (max-height: 430px) and (orientation: landscape) {
+  .love-message {
+    font-size: 1.8rem;
+    padding: 0.5rem;
+  }
+
+  .red-button {
+    font-size: 1rem;
+    padding: 0.8rem 1.8rem;
+  }
+
+  .red-button:hover {
+    transform: scale(1.1);
+  }
+
+  .red-button:active {
+    transform: scale(0.95);
+  }
+
+  .heart {
+    font-size: 1.8rem;
+  }
+
+  .footer {
+    font-size: 0.7rem;
+    bottom: 10px;
   }
 }
